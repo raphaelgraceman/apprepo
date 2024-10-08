@@ -4,12 +4,15 @@
  *******************************************/
 /* ***********************
  * Require Statements
- *************************/
+ *************************/ 
 const express = require("express")
+const utilities = require('./utilities'); 
+utilities.yourFunction();
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const baseController = require("./controllers/baseController") 
 
 
 /* ***********************
@@ -24,9 +27,23 @@ app.set("layout", "./layouts/layout")
  *************************/
 app.use(static)
 //index route
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
+app.get("/", baseController.buildHome)
+
+
+/* ***********************
+* Express Error Handler
+* Place after all other middleware
+*************************/
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  res.render("errors/error", {
+    title: err.status || 'Server Error',
+    message: err.message,
+    nav
+  })
 })
+
 
 /* ***********************
  * Local Server Information
