@@ -7,13 +7,12 @@
  *************************/ 
 const express = require("express")
 const utilities = require('./utilities'); 
-utilities.yourFunction();
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
-const static = require("./routes/static")
-const baseController = require("./controllers/baseController") 
-
+const static = require("./routes/static");
+const baseController = require("./controllers/baseController"); 
+const inventoryRoute = require("./routes/inventoryRoute");
 
 /* ***********************
  * View Engine and Templates
@@ -25,11 +24,19 @@ app.set("layout", "./layouts/layout")
 /* ***********************
  * Routes
  *************************/
+//**Static route**/
 app.use(static)
 //index route
 app.get("/", baseController.buildHome)
+//Inventory Routes
+app.use("/inv", inventoryRoute)
 
 
+/*****FILE NOT FOUND ROUTE******** */
+/*Should always be placed after all routes... the last item in the route */
+app.use(async (req, res, next) => {
+  next({status: 404, message: "Looks like this page in unavailable."});
+})
 /* ***********************
 * Express Error Handler
 * Place after all other middleware

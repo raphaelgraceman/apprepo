@@ -1,0 +1,12 @@
+<!---The Content View-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<!---The Messagee Block-->
+<%# messages() %>
+
+<!--The Inventory Items Display Block-->
+<%- grid %>
