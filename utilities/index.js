@@ -67,35 +67,7 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 
-Util.wrapVehicleInfo = async function (vehicleDetails) {
-
-  //The HTML Structure 
-  return `  
-      <html>  
-      <head>  
-          <title>${vehicleDetails.inv_make} ${vehicleDetails.inv_model}</title>  
-      </head>  
-      <body class="container">
-        <div class="vehicle-info">
-            <div class="vehicle-infoHeading>
-              <h1>${vehicleDetails.inv_make} ${vehicleDetails.inv_model}</h1>  
-            </div>
-
-            <div class="vehicle-image">
-              <img src="${vehicleInfo.inv_image}" alt="${vehicleData.inv_make} ${vehicleData.inv_model}" />  
-            </div>
-
-          <div>  
-            <p>Year: ${vehicleDetails.inv_year.toLocaleString()}</p>  
-            <p>Price: $${vehicleDetails.inv_price.toLocaleString()}</p>  
-            <p>Mileage: ${vehicleDetails.inv_miles.toLocaleString()} miles</p>  
-            <p>Description: ${vehicleInfo.inv_description}</p>  
-          </div>
-        </div>
-      </body>  
-      </html>  
-  `;  
-};  
+Util.wrapVehicleInfo = async function (vehicleDetails) { }
 
 
 

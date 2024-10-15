@@ -1,132 +1,165 @@
 /*****   Large Styling   ***/
-@media (min-width: 640px){
-  
-    .siteName {
-      font-size: 2rem;
-      font: bolder;
-      margin-right: 70%;
-    }
-    
-    .siteName a, #tools a{
-      text-decoration: none;
-      color: black;
-    }
-    
-    #tools a {
-      font-size: 1rem;
-    }
-    
-    /***DIsplay navigation in flex 
+@media (min-width: 640px) {
+  .siteName {
+    font-size: 2rem;
+    font: bolder;
+    margin-right: 70%;
+  }
+
+  .siteName a,
+  #tools a {
+    text-decoration: none;
+    color: black;
+  }
+
+  #tools a {
+    font-size: 1rem;
+  }
+
+  /***DIsplay navigation in flex 
     direction with no decoration *****/
-    nav ul {
-        display: flex;
-        list-style: none;
-        padding: 20px;
-        margin-bottom: 10px;
-        justify-content: space-around;
-        background-color: black;
-        margin-left: 1px;
-        margin-right: 1px;
-        margin-bottom: 80px;
-    }
-    
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        height: auto;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-    
-    .grid-view {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    #grid-1 {
-        grid-column: 2;
-        grid-row: 1;
-        margin: 10px;
-    }
-    #grid-2 {
-        grid-column: 1;
-        grid-row: 1;
-        margin: 10px;
-    }
+  nav ul {
+    display: flex;
+    list-style: none;
+    padding: 20px;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    background-color: black;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 80px;
+  }
 
-    .grid-image {
-        width: 70px;
-        height: 70px;
-        margin-left: 35%;
-        padding-top: 5px;
-    }
-    
-    #upgrades section a {
-        margin-left: 100px;
-        color: darkblue;
-    }
-    /*** Hero Image  ***/
-    .hero-image img {
-        width: 50%;
-        height: 50%;
-        justify-content: center;
-        margin-left: 25%;
-    }
-    /*** Hero Overlay **/
-    .hero-overlay-text {
-        position: relative;
-        background-color: #dfdada;
-        margin: 0 0 1rem 1rem;
-        border: 1px solid #dbd8d8;
-        width: fit-content;
-        height: fit-content;
-        transform: translate( 0,-140%);
-        margin-left: 27%;
-        opacity: .75;
-    }
-    
-    .hero-overlay-text img {
-        width: 90%;
-        height: 40px;
-        margin-left: -2px;
-    }
-    .hero-overlay-text h2, 
-    .hero-overlay-text p {
-        color: rgb(0, 68, 255);
-        margin-top: -0px;
-        font-size: 1rem;
-        padding: 4px;
-    }
-    .hero-overlay-text h2{
-        margin-bottom: 0px;
-    }  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .grid-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  #grid-1 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 10px;
+  }
+  #grid-2 {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 10px;
+  }
+
+  .grid-image {
+    width: 70px;
+    height: 70px;
+    margin-left: 35%;
+    padding-top: 5px;
+  }
+
+  #upgrades section a {
+    margin-left: 100px;
+    color: darkblue;
+  }
+  /*** Hero Image  ***/
+  .hero-image img {
+    width: 50%;
+    height: 50%;
+    justify-content: center;
+    margin-left: 25%;
+  }
+  /*** Hero Overlay **/
+  .hero-overlay-text {
+    position: relative;
+    background-color: #dfdada;
+    margin: 0 0 1rem 1rem;
+    border: 1px solid #dbd8d8;
+    width: fit-content;
+    height: fit-content;
+    transform: translate(0, -140%);
+    margin-left: 27%;
+    opacity: 0.75;
+  }
+
+  .hero-overlay-text img {
+    width: 90%;
+    height: 40px;
+    margin-left: -2px;
+  }
+  .hero-overlay-text h2,
+  .hero-overlay-text p {
+    color: rgb(0, 68, 255);
+    margin-top: -0px;
+    font-size: 1rem;
+    padding: 4px;
+  }
+  .hero-overlay-text h2 {
+    margin-bottom: 0px;
+  }
+
+  /**** Vehicle detail view Info Styles ***/
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .vehicle-info {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+  }
+
+  .vehicle-image {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .vehicle-details {
+    flex: 1;
+    max-width: 50%;
+    padding: 20px;
+  }
+
+  .full-size-image {
+    width: 100%;
+    height: auto;
+  }
 
 
 
 
-    /**** Vehicle detail view Info Styles ***/
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      
-      .vehicle-info {
-        display: flex;
-        flex-direction: row;
-        margin: 20px;
-      }
-      
-      .vehicle-image {
-        flex: 1;
-        max-width: 50%;
-      }
-      
-      .vehicle-details {
-        flex: 1;
-        max-width: 50%;
-        padding: 20px;
-      }
-      
-      .full-size-image {
-        width: 100%;
-        height: auto;
-      }
+
+
+
+
+
+  
+  /* Classification View */
+  #inv-display {
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
+  #inv-display h2 {
+    font-size: 1rem;
+  }
+  #inv-display li {
+    max-width: 200px;
+    flex: 1 0 auto;
+    text-align: center;
+    height: 250px;
+    display: grid;
+    border-radius: 10px;
+  }
+  #inv-display a {
+    height: 150px;
+  }
+  #inv-display img {
+    border-radius: 10px 10px;
+  }
+  #inv-display div {
+    width: 100%;
+    height: 100px;
+  } /***********************/
 }
