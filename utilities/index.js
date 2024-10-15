@@ -68,13 +68,8 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 Util.wrapVehicleInfo = async function (vehicleDetails) {
-  const vehicleDetails = { make, model, year, price, mileage, description, imageUrl };
 
-  // Format price and mileage with commas
-  const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-  const formattedMileage = new Intl.NumberFormat('en-US').format(mileage);
- 
- //The HTML Structure 
+  //The HTML Structure 
   return `  
       <html>  
       <head>  
@@ -91,9 +86,9 @@ Util.wrapVehicleInfo = async function (vehicleDetails) {
             </div>
 
           <div>  
-            <p>Year: ${vehicleDetails.year}</p>  
-            <p>Price: ${formattedPrice.toLocaleString()}</p>  
-            <p>Mileage: ${formattedMileage.toLocaleString()} miles</p>  
+            <p>Year: ${vehicleDetails.year.toLocaleString()}</p>  
+            <p>Price: $${vehicleDetails.inv_price.toLocaleString()}</p>  
+            <p>Mileage: ${vehicleDetails.mileage.toLocaleString()} miles</p>  
             <p>Description: ${vehicleInfo.description}</p>  
           </div>
         </div>
