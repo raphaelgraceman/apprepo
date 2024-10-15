@@ -73,23 +73,23 @@ Util.wrapVehicleInfo = async function (vehicleDetails) {
   return `  
       <html>  
       <head>  
-          <title>${vehicleDetails.make} ${vehicleDetails.model}</title>  
+          <title>${vehicleDetails.inv_make} ${vehicleDetails.inv_model}</title>  
       </head>  
       <body class="container">
         <div class="vehicle-info">
             <div class="vehicle-infoHeading>
-              <h1>${vehicleDetails.make} ${vehicleDetails.model}</h1>  
+              <h1>${vehicleDetails.inv_make} ${vehicleDetails.inv_model}</h1>  
             </div>
 
             <div class="vehicle-image">
-              <img src="${vehicleInfo.imageUrl}" alt="${vehicleData.make} ${vehicleData.model}" />  
+              <img src="${vehicleInfo.inv_image}" alt="${vehicleData.inv_make} ${vehicleData.inv_model}" />  
             </div>
 
           <div>  
-            <p>Year: ${vehicleDetails.year.toLocaleString()}</p>  
+            <p>Year: ${vehicleDetails.inv_year.toLocaleString()}</p>  
             <p>Price: $${vehicleDetails.inv_price.toLocaleString()}</p>  
-            <p>Mileage: ${vehicleDetails.mileage.toLocaleString()} miles</p>  
-            <p>Description: ${vehicleInfo.description}</p>  
+            <p>Mileage: ${vehicleDetails.inv_miles.toLocaleString()} miles</p>  
+            <p>Description: ${vehicleInfo.inv_description}</p>  
           </div>
         </div>
       </body>  
