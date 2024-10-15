@@ -67,22 +67,36 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 
+Util.wrapVehicleInfo = async function (vehicleDetails) {
+  const vehicleDetails = { make, model, year, price, mileage, description, imageUrl };
 
-Util.wrapVehicleDataInHTML = async function(vehicleData)  {  
+  // Format price and mileage with commas
+  const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+  const formattedMileage = new Intl.NumberFormat('en-US').format(mileage);
+ 
+ //The HTML Structure 
   return `  
       <html>  
       <head>  
-          <title>${vehicleData.make} ${vehicleData.model}</title>  
+          <title>${vehicleDetails.make} ${vehicleDetails.model}</title>  
       </head>  
-      <body>  
-          <h1>${vehicle.make} ${vehicle.model}</h1>  
-          <img src="${vehicleData.imageUrl}" alt="${vehicleData.make} ${vehicleData.model}" />  
+      <body class="container">
+        <div class="vehicle-info">
+            <div class="vehicle-infoHeading>
+              <h1>${vehicleDetails.make} ${vehicleDetails.model}</h1>  
+            </div>
+
+            <div class="vehicle-image">
+              <img src="${vehicleInfo.imageUrl}" alt="${vehicleData.make} ${vehicleData.model}" />  
+            </div>
+
           <div>  
-              <p>Year: ${vehicleData.year}</p>  
-              <p>Price: $${vehicleData.price.toLocaleString()}</p>  
-              <p>Mileage: ${vehicleData.mileage.toLocaleString()} miles</p>  
-              <p>Description: ${vehicleData.description}</p>  
-          </div>  
+            <p>Year: ${vehicleDetails.year}</p>  
+            <p>Price: ${formattedPrice.toLocaleString()}</p>  
+            <p>Mileage: ${formattedMileage.toLocaleString()} miles</p>  
+            <p>Description: ${vehicleInfo.description}</p>  
+          </div>
+        </div>
       </body>  
       </html>  
   `;  

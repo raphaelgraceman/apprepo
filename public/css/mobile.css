@@ -127,3 +127,14 @@
     margin-left: 40px;
     color: darkblue;
   }  
+
+
+
+  /****** Vehicle vDetail View Stylings ****/
+  .vehicle-info {
+    flex-direction: column;
+}
+
+.vehicle-image, .vehicle-details {
+    max-width: 100%;
+}

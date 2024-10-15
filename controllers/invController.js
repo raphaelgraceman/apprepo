@@ -22,18 +22,26 @@ invCont.buildByClassificationId = async function (req, res, next) {
 
 
 /* ***************************
- *  Build inventory Detail view
+ *  Creating a function to handle the request
+    and retrieve the vehicle data
  * ************************** */
-invCont.getVehicleDetails = async function (req, res, next) {
+invCont.getVehicleDetails = async (req, res) => {
+  const vehicleId = req.params.id;
+
   try {
-  const inventory_id = req.params.inventoryId
-  const vehicleData = await inventoryModel.getVehicleById(req.params.inventory_id)  
-  const htmlContent = wrapVehicleDataInHTML(vehicleData);  
-  res.send(htmlContent);  
-  } catch (error) {  
-  res.status(500).send('Error retrieving vehicle details');  
-  }  
-  };  
+      const vehicleInfo = await inventoryModel.getVehicleById(vehicleId);
+      if (!vehicleInfo) {
+          return res.status(404).send("The vehicle seemed not found!");
+      }
+
+      const vehicleHtml = utilities.wrapVehicleInfo(vehicleInfo);
+      res.send(vehicleHtml);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+  }
+};
+
 
 
 

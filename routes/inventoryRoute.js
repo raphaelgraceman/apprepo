@@ -8,7 +8,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 
 
 // Route to get vehicle details  
-router.get("/inventory/:inventoryId", invController.getVehicleDetails);  
+router.get("/vehicle/:id", invController.getVehicleDetails);  
 
 
 module.exports = router;

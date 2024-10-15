@@ -97,4 +97,36 @@
     .hero-overlay-text h2{
         margin-bottom: 0px;
     }  
+
+
+
+
+    /**** Vehicle detail view Info Styles ***/
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      
+      .vehicle-info {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+      }
+      
+      .vehicle-image {
+        flex: 1;
+        max-width: 50%;
+      }
+      
+      .vehicle-details {
+        flex: 1;
+        max-width: 50%;
+        padding: 20px;
+      }
+      
+      .full-size-image {
+        width: 100%;
+        height: auto;
+      }
 }
