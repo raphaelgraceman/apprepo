@@ -16,8 +16,25 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
+    errors: null
   })
 }
+
+
+/* ***************************
+ *  Build inventory Detail view
+ * ************************** */
+invCont.getVehicleDetails = async function (req, res, next) {
+  try {
+  const inventory_id = req.params.inventoryId
+  const vehicleData = await inventoryModel.getVehicleById(req.params.inventory_id)  
+  const htmlContent = wrapVehicleDataInHTML(vehicleData);  
+  res.send(htmlContent);  
+  } catch (error) {  
+  res.status(500).send('Error retrieving vehicle details');  
+  }  
+  };  
+
 
 
 module.exports = invCont

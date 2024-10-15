@@ -11,7 +11,7 @@ Util.getNav = async function (req, res, next) {
   data.rows.forEach((row) => {
     list += "<li>"
     list +=
-      '<a href="/inv/type/#' +
+      '<a href="/inv/type/' +
       row.classification_id +
       '" title="See our inventory of ' +
       row.classification_name +
@@ -57,6 +57,36 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+
+
+Util.wrapVehicleDataInHTML = async function(vehicleData)  {  
+  return `  
+      <html>  
+      <head>  
+          <title>${vehicleData.make} ${vehicleData.model}</title>  
+      </head>  
+      <body>  
+          <h1>${vehicle.make} ${vehicle.model}</h1>  
+          <img src="${vehicleData.imageUrl}" alt="${vehicleData.make} ${vehicleData.model}" />  
+          <div>  
+              <p>Year: ${vehicleData.year}</p>  
+              <p>Price: $${vehicleData.price.toLocaleString()}</p>  
+              <p>Mileage: ${vehicleData.mileage.toLocaleString()} miles</p>  
+              <p>Description: ${vehicleData.description}</p>  
+          </div>  
+      </body>  
+      </html>  
+  `;  
+};  
 
 
 

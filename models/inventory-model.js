@@ -26,7 +26,16 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 
+/* ***************************
+ *  Get all vehicle data based on its ID
+ * ************************** */
+async function getVehicleById(inventoryId)  {  
+  const query = 'SELECT * FROM vehicles WHERE inv_id = ?';  
+  const results = await pool.query(query, [inventoryId]);  
+  return results[0]; // Return the vehicle data  
+};  
 
 
 
-module.exports = {getClassifications, getInventoryByClassificationId};
+
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById};
