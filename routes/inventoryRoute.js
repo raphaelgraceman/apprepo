@@ -7,8 +7,8 @@ const invController = require("../controllers/invController")
 router.get("/type/:classificationId", invController.buildByClassificationId);
 
 
-// Route to get vehicle details  
-router.get("/detail/:id", invController.getVehicleDetails);  
+// Route to build vehicle details  
+router.get("/detail/:id", invController.buildByVehicleId);  
 
 
 module.exports = router;

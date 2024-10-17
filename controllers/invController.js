@@ -25,28 +25,19 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Creating a function to handle the request
     and retrieve the vehicle data
  * ************************** */
-invCont.getVehicleDetails = async (req, res) => {
+invCont.buildByVehicleId = async (req, res) => {
   const vehicle_id = req.params.id;
-
-  try {
-      const vehicleInfo = await invModel.getVehicleById(vehicle_id);
-      if (!vehicleInfo) {
-          return res.status(404).send("The vehicle seemed not found!");
-      }
-
-      const vehicleHtml = utilities.wrapVehicleInfo(vehicleInfo);
-      let nav = await utilities.getNav()
-      res.render("./inventory/vehicleDetails", {
+  const vehicleInfo = await invModel.getByVehicleId(vehicle_id);
+  const vehicleHtml = utilities.buildVehicleDetailsGrid(vehicleInfo);
+  let nav = await utilities.getNav()
+  res.render("./inventory/vehicleDetails", {
       title: " vehicles",
       nav,
       vehicleHtml,
       errors: null
     })
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-  }
-};
+
+}
 
 
 

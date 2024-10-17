@@ -67,7 +67,37 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 
-Util.wrapVehicleInfo = async function (vehicleDetails) { }
+/*******Building the vehicle details to be wrapped in hTML into the view ***** */
+Util.buildVehicleDetailsGrid = function (vehicleInfo) {
+    let vehicleHTML
+
+    if (vehicleInfo.length > 0) {
+        vehicleHTML = '<ul id="inv-display">'
+        vehicleInfo.forEach(vehicle => {
+            vehicleHTML += `
+            <li>
+                <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+                    <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" />
+                </a>
+                <div class="namePrice">
+                    <hr />
+                    <h2>
+                        <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+                            ${vehicle.inv_make} ${vehicle.inv_model}
+                        </a>
+                    </h2>
+                    <span>$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>
+                </div>
+            </li>`;
+        })
+        vehicleHTML += '</ul>'
+    } else {
+        vehicleHTML += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    }
+
+    return vehicleHTML
+}
+
 
 
 
