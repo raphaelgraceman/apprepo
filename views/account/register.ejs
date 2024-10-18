@@ -4,21 +4,66 @@
 <% } else { res.redirect('/') } %>
 
 <!---The Messagee Block-->
-<% messages() %>
+<% messages() %> 
+
+<% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
 
 <!--Displaying the Registration HTML forms view-->
-<form action="/account/register" method="post">
+<fieldset>
+  <legend>Personal Info</legend>
+  <form action="/account/register" method="post">
     <label for="account_firstname">First Name:</label>
-    <input type="text" name="account_firstname" required>
+    <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
 
     <label for="account_lastname">Last Name:</label>
-    <input type="text" name="account_lastname" required>
+    <input type="text" name="account_laststname" id="accountLastname" required value="<%= locals.account_lastname %>">
 
     <label for="account_email">Email:</label>
-    <input type="email" name="account_email" required>
+    <input
+      type="email"
+      name="account_email"
+      required
+      placeholder="Enter a valid email address"
+      required
+    />
 
-    <label for="account_password">Password:</label>
-    <input type="password" name="account_password" required minlength="12" pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])">
+    <div>
+      <label for="accountPassword">Password:</label>
+      <input
+        type="password"
+        name="account_password"
+        id="accountPassword"
+        required
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+      />
+      <button type="button" id="togglePassword">Show</button>
+      <br /><span id="passCharacters"
+        >Passwords must be at least 12 characters and contain at least 1 number,
+        1 capital letter and 1 special character</span
+      >
+    </div>
 
-    <button type="submit">Register</button>
-</form>
+    <button type="submit" id="submitBtn">Register</button>
+  </form>
+</fieldset>
+
+<script>
+  const togglePasswordButton = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("accountPassword");
+
+  togglePasswordButton.addEventListener("click", function () {
+    // Toggle the type attribute
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+
+    // Toggle the button text
+    this.textContent = type === "password" ? "Show" : "Hide";
+  });
+</script>

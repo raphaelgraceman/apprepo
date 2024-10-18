@@ -1,4 +1,10 @@
 /*** MOBILE SIZE VIEW *****/
+body {
+  margin: 0 0 0 0;
+}
+main {
+  margin: 0 2% 0 2%;
+}
 #top-header {
   display: flex;
 }
@@ -153,4 +159,89 @@ li {
 }
 #inv-display li img {
   object-fit: fill;
+}
+
+/***** Form Input Styling using pseudo-classes ****/
+input:required:invalid,
+input:focus:invalid {
+  border-left: 6px solid red;
+  color: rgb(0, 0, 0);
+}
+
+input:required:valid {
+  border-left: green solid 6px;
+  background-color: #efdea3;
+  color: black;
+}
+fieldset {
+  background-image: url(/images/vehicles/adventador.jpg);
+}
+fieldset, legend {
+  margin: 2rem 0;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: .5rem 2%;
+  max-width: fit-content;
+}
+input {
+  border-radius: 10px;
+  margin-left: 15%;
+}
+form label{
+  display: block;
+  margin-left: 15%;
+  padding-top: 1rem;
+  color:red;
+  font-size: .8rem;
+}
+/* Style the password input field when it is focused */
+input[type="password"]:focus {
+  outline: none;
+  border-color: #007bff; /* Change the border color when focused */
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+#passCharacters {
+  font-size: .6rem;
+  color: rgb(0, 0, 0);
+}
+#togglePassword {
+  font-size: .8rem;
+  background-color: black;
+  color: white;
+}
+input::placeholder {
+  font-size: 13px;
+}
+
+/*----- SUBMIT ------*/
+#submitBtn {
+  border: none;
+  background-color: red;
+  color: white;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  margin: 10px 0 2rem 2%;
+  width: 96%;
+  max-width: 20rem;
+  cursor: pointer;
+}
+
+/* LOGIN STYLING */
+#loginFieldset {
+  width: 100%;
+}
+#loginButton {
+  background-color: green;
+  color: black;
+  cursor: pointer;
+  margin-left: 45%;
+}
+.loginFormLabel {
+  margin: 0 0 0 0;
+  display: flex;
+  padding: 2px;
 }

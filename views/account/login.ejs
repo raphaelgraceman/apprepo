@@ -8,20 +8,35 @@
 
 <!--Displaying the login HTML forms view-->
 
-<form action="/account/login" method="POST">
-  <fieldset>
-    <legend>Login</legend>
-    <label class="top"
-      >Email*<input
-        type="email"
-        name="account_email"
-        placeholder="raphael10@gmail.com"
-        required
-    /></label>
-    <label for="password">Password:</label>
-    <input type="password" name="account_password" required />
-    <button type="submit">Login</button>
+<form id="loginForm" action="/account/login" method="post">
+  <fieldset id="loginFieldset">
+    <legend>Login Details</legend>
+    <label class="loginFormLabel">Email:<input type="email" name="account_email" placeholder="Enter a valid email address" required/>
+    </label><br>
+
+    <div>
+      <label for="accountPassword" class="loginFormLabel">Password:
+      <input type="password" name="account_password" id="accountPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+      <button type="button" id="togglePassword">Show</button> </label>
+      <br><span id="passCharacters">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+    </div>
+
+    <button type="submit" id="loginButton">Login</button>
   </fieldset>
 
   <p>No account? <a href="/account/register">Sign-up</a></p>
 </form>
+
+<script>
+  const togglePasswordButton = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('accountPassword');
+
+  togglePasswordButton.addEventListener('click', function () {
+  // Toggle the type attribute
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+      // Toggle the button text
+      this.textContent = type === 'password' ? 'Show' : 'Hide';
+  });
+</script>
