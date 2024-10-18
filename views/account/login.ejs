@@ -1,0 +1,27 @@
+<!---The Heading Content View-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!---The Messagee Block-->
+<% messages() %>
+
+<!--Displaying the login HTML forms view-->
+
+<form action="/account/login" method="POST">
+  <fieldset>
+    <legend>Login</legend>
+    <label class="top"
+      >Email*<input
+        type="email"
+        name="account_email"
+        placeholder="raphael10@gmail.com"
+        required
+    /></label>
+    <label for="password">Password:</label>
+    <input type="password" name="account_password" required />
+    <button type="submit">Login</button>
+  </fieldset>
+
+  <p>No account? <a href="/account/register">Sign-up</a></p>
+</form>

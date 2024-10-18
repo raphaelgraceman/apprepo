@@ -7,7 +7,6 @@
  *************************/ 
 const session = require("express-session")
 const pool = require('./database/')
-
 const express = require("express")
 const utilities = require("./utilities/") 
 const expressLayouts = require("express-ejs-layouts")
@@ -16,8 +15,8 @@ const app = express()
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController"); 
 const inventoryRoute = require("./routes/inventoryRoute");
-
-
+const accountRoute = require("./routes/accountRoute");
+const bodyParser = require("body-parser")
 
 
 
@@ -35,6 +34,11 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
+
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) 
+
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
@@ -62,12 +66,14 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 //Inventory Routes
 app.use("/inv", inventoryRoute)
+//account Routes
+app.use("/account", require("./routes/accountRoute"));
 
 
 /*****FILE NOT FOUND ROUTE******** */
 /*Should always be placed after all routes... the last item in the route */
 app.use(async (req, res, next) => {
-  next({status: 404, message: "Looks like this page in unavailable."});
+  next({status: 404, message: "Looks like this page is under maintenance."});
 })
 
 /* ***********************
@@ -99,3 +105,4 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
