@@ -1,12 +1,15 @@
 // Needed Resources 
 const express = require("express")
-const router = new express.Router() 
+const router = new express.Router()
 const accountController = require('../controllers/accountController');
 const utilities = require('../utilities');
 
 
 // Building the path to get Route to the account login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
+
+// Building the path to get Route to the account login view
+router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
 // Route to handle registration
 router.post('/register', utilities.handleErrors(accountController.registerAccount));
@@ -19,4 +22,3 @@ router.use((err, req, res, next) => {
 });
 
 module.exports = router;
-
