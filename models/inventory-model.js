@@ -43,5 +43,21 @@ async function getByVehicleId(id)  {
 
 
 
+//Function to insert the classification item
+async function addClassification(classification_name) {
+    const query = 'INSERT INTO classifications (classification_name) VALUES ($1) RETURNING *';
+    const values = [classification_name];
+    const result = await pool.query(query, values);
+    return result.rows[0]; // Return the newly created classification
+}
 
-module.exports = {getClassifications, getInventoryByClassificationId, getByVehicleId};
+//Function to insert inventory item into the database
+async function addInventory({ inv_make, inv_model, classification_id, inv_image }) {
+  const query = 'INSERT INTO inventory (inv_make, inv_model, classification_id, inv_image) VALUES ($1, $2, $3, $4) RETURNING *';
+  const values = [inv_make, inv_model, classification_id, inv_image];
+  const result = await db.query(query, values);
+  return result.rows[0]; // Return the newly created inventory item
+}
+
+
+module.exports = {getClassifications, getInventoryByClassificationId, getByVehicleId, addClassification, addInventory};

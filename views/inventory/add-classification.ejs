@@ -1,0 +1,18 @@
+<!---The Heading Content View-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!---The Messagee Block-->
+<% messages() %>
+
+
+
+<!-- add-classification.ejs -->
+<h1>Add New Classification</h1>
+<form action="/inv/classification" method="POST">
+  <label for="classificationName">Classification Name:</label>
+  <input type="text" name="classification_name" id="classificationName" required
+  pattern="[^\\s!@#$%^&*()_+={}|[\]:;\"'<>,.?/~`]+">
+  <button type="submit">Add Classification</button>
+</form>

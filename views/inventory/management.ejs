@@ -1,0 +1,13 @@
+<!---The Heading Content View-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<!---The Messagee Block-->
+<% messages() %>
+
+<!---links to trigger an "add classification" and add "New Inventory"-->
+<a href="/inv/add-classification">Add New Classification</a>
+<a href="/inv/add-inventory">Add New Inventory Item</a>
