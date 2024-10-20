@@ -7,12 +7,15 @@ VALUES
 
 
 --Query 2 ---
+Update Query
 UPDATE public.account
 SET account_type = 'Admin'
-WHERE account_id = 1;
+WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
+
 
 ---Query 3 ---- DELETE Tony Stack from the  Database
-
+DELETE FROM public.account 
+WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
 
 --Query 4 -- 
 --Replace the phrase in the sentence from 'small interiors' to 'a huge interior' in the 
