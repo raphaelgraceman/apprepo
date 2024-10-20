@@ -135,6 +135,23 @@ li {
 }
 
 /****** Vehicle vDetail View Stylings ****/
+.inv-display {
+  display: block;
+}
+#detailsList {
+  list-style: none;
+  text-decoration: none;
+}
+#detailsLeft {
+  border-bottom: 2px solid chocolate;
+  border-radius: 10px;
+}
+
+#detailsRight {
+  border: 1px solid black;
+  background-color: chocolate;
+  border-radius: 12px 120;
+}
 .vehicle-info {
   flex-direction: column;
 }

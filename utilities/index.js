@@ -85,50 +85,63 @@ Util.buildClassificationGrid = async function (data) {
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
-
-
 /*******Building the vehicle details to be wrapped in hTML into the view ***** */
 Util.buildVehicleDetailsGrid = function (vehicleInfo) {
-  let vehicleHTML = '<ul id="inv-display">'
-  vehicleHTML += `
-            <li>
-                <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
-                    <img src="${vehicleInfo.inv_image}" alt="Image of ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} on CSE Motors" />
-                </a>
-                <div class="namePrice">
-                    <hr />
-                    <h2>
-                        <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
-                            ${vehicleInfo.inv_make} ${vehicleInfo.inv_model}
-                        </a>
-                    </h2>
-                    <span>$${new Intl.NumberFormat('en-US').format(vehicleInfo.inv_price)}</span>
-                </div>
-            </li>`;
-  vehicleHTML += '</ul>'
+  let vehicleHTML = '<div class="inv-display">'
+    vehicleHTML += `
+      <hr>
+        <div id="detailHeader">
+          <h2 >
+          <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
+              ${vehicleInfo.inv_make} ${vehicleInfo.inv_model}
+          </a>
+          </h2>
+                <span>$${new Intl.NumberFormat('en-US').format(vehicleInfo.inv_price)}</span>
+        </div>
+      <hr 
+      <hr>
+      
+      <div id="detailsLeft">
+        <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
+            <img src="${vehicleInfo.inv_image}" alt="Image of ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} on CSE Motors" />
+        </a>
+      </div>
 
+      
+      <div id="detailsRight">
+        <ul id="detailsList">
+          <li><span> Price:
+          ${new Intl.NumberFormat("en-US").format(vehicleInfo.inv_price)} 
+          </span></li>
+        
+          <li><span> Description: ${vehicleInfo.inv_description} </span></li>
+          <li><span> Color: ${vehicleInfo.inv_color} </span></li>
+          <li><span> Miles: ${vehicleInfo.inv_miles} </span><li>
+        </ul>
+      </div>
+
+    </div>`
   return vehicleHTML
-}
-
-
+  
+};
 
 Util.buildClassificationList = async function (classification_id = null) {
-  let data = await invModel.getClassifications()
+  let data = await invModel.getClassifications();
   let classificationList =
-    '<select name="classification_id" id="classificationList" required>'
-  classificationList += "<option value=''>Choose a Classification</option>"
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
   data.rows.forEach((row) => {
-    classificationList += '<option value="' + row.classification_id + '"'
+    classificationList += '<option value="' + row.classification_id + '"';
     if (
       classification_id != null &&
       row.classification_id == classification_id
     ) {
-      classificationList += " selected "
+      classificationList += " selected ";
     }
-    classificationList += ">" + row.classification_name + "</option>"
-  })
-  classificationList += "</select>"
-  return classificationList
-}
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
+};
 
 module.exports = Util;
