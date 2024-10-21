@@ -113,7 +113,7 @@ validate.loginRules = () => {
 /* ******************************
  * Check data and return errors or continue to Login
  * ***************************** */
-validate.checkRegData = async (req, res, next) => {
+validate.checkLoginData = async (req, res, next) => {
     const {account_email } = req.body;
     let errors = [];
     errors = validationResult(req);

@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/ 
+const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const pool = require('./database/')
 const express = require("express")
@@ -17,8 +18,6 @@ const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser")
-
-
 
 
 /* ***********************
@@ -34,7 +33,10 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
-
+/* Cookie Parser*/
+app.use(cookieParser())
+/*tokenware*/
+app.use(utilities.checkJWTToken)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) 

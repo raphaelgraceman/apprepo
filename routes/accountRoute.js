@@ -8,7 +8,10 @@ const utilities = require("../utilities");
 // Building the path to get Route to the account login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
-// Building the path to get Route to the account login view
+// New default route for account management
+router.get('/', utilities.handleErrors(accountController.buildAccountManagementView));
+
+// Building the Route to deliver the account login view
 router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegister)
@@ -22,10 +25,14 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 );
 
-// Process the login attempt
-router.post("/login", (req, res) => {
-  res.status(200).send("login process");
-});
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+
+)
 
 // Error handler middleware
 router.use((err, req, res, next) => {
