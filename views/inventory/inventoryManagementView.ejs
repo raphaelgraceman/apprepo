@@ -5,11 +5,12 @@
       res.redirect('/')
 } %>
 
-<h1>Inventory Management</h1>
     
 <% if (messages()) { %>
     <div class="flash-message"><%= messages() %></div>
 <% } %>
 
-<a href="/inv/add-classification">Add New Classification</a>
-<a href="/inv/add-inventory">Add New Inventory Item</a>
+<div id="invManagement">
+    <a id="addClassification" href="/inv/add-classification">Add New Classification</a>
+    <a id="addInventory" href="/inv/add-inventory">Add New Inventory Item</a>
+</div>

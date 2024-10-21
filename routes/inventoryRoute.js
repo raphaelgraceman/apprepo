@@ -13,8 +13,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:id", invController.buildByVehicleId);
 
 // Route for the management view
-router.get("/inv", (invController.managementView));
-
+router.get("/", (invController.inventoryManagementView));
 
 
 
@@ -49,6 +48,7 @@ router.post('/inv/add-classification', async (req, res) => {
 router.get('/inv/add-inventory', (req, res) => {
     res.render('inventory/add-inventory'); 
 });
+
 
 //Routed to post the add inventory view
 router.post('/inv/add-inventory', async (req, res) => {

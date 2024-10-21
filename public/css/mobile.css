@@ -274,3 +274,16 @@ input::placeholder {
   display: flex;
   padding: 2px;
 }
+
+
+/*Inv Management */
+#invManagement {
+  display: block;
+  padding: 10px;
+  border: 1px solid black;
+  border-bottom: 4px solid red;
+}
+
+#invManagement a{
+  color: black;
+}
