@@ -5,9 +5,11 @@
       res.redirect('/')
 } %>
 
-<!---The Messagee Block-->
-<% messages() %>
+<h1>Inventory Management</h1>
+    
+<% if (messages()) { %>
+    <div class="flash-message"><%= messages() %></div>
+<% } %>
 
-<!---links to trigger an "add classification" and add "New Inventory"-->
 <a href="/inv/add-classification">Add New Classification</a>
 <a href="/inv/add-inventory">Add New Inventory Item</a>

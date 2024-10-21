@@ -36,8 +36,12 @@ invCont.buildByVehicleId = async (req, res) => {
       vehicleHtml,
       errors: null
     })
+  }
 
-}
+invCont.managementView = async function(req, res){
+  const nav = await utilities.getNav()
+  res.render("./inventory/management", {title: "Inventory Management", nav})   
+} 
 
 
 //Function  to handle the classification Insertion
@@ -68,6 +72,6 @@ async function addInventory(req, res) {
   }
 }
 
-module.exports = { addClassification, addInventory };
+module.exports = {addClassification, addInventory };
 
 module.exports = invCont

@@ -70,6 +70,8 @@ app.use("/inv", inventoryRoute)
 app.use("/account", require("./routes/accountRoute"));
 
 
+
+
 /*****FILE NOT FOUND ROUTE******** */
 /*Should always be placed after all routes... the last item in the route */
 app.use(async (req, res, next) => {

@@ -1,6 +1,7 @@
 // Needed Resources 
 const express = require("express")
 const router = new express.Router() 
+const utilities = require('../utilities');
 const invController = require("../controllers/invController")
 const validateClassification  = require("../utilities/inventory-validate")
 
@@ -12,9 +13,10 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:id", invController.buildByVehicleId);
 
 // Route for the management view
-router.get('/inv', (req, res) => {
-    res.render('inventory/management')}
-);
+router.get("/inv", (invController.managementView));
+
+
+
 
 // Route to get the add-classification view
 router.get('/inv/add-classification', (req, res) => {
