@@ -46,9 +46,9 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_make +
         " " +
         vehicle.inv_model +
-        ' on CSE Motors" /></a>';
+        ' on CSE Motors"> </a>';
       grid += '<div class="namePrice">';
-      grid += "<hr />";
+      grid += " ";
       grid += "<h2>";
       grid +=
         '<a href="../../inv/detail/' +
@@ -89,29 +89,27 @@ Util.handleErrors = (fn) => (req, res, next) =>
 Util.buildVehicleDetailsGrid = function (vehicleInfo) {
   let vehicleHTML = '<div class="inv-display">'
     vehicleHTML += `
-      <hr>
         <div id="detailHeader">
           <h2 >
-          <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
-              ${vehicleInfo.inv_make} ${vehicleInfo.inv_model}
-          </a>
+            <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
+                ${vehicleInfo.inv_make} ${vehicleInfo.inv_model}
+            </a>
           </h2>
-                <span>$${new Intl.NumberFormat('en-US').format(vehicleInfo.inv_price)}</span>
+          <span>$${new Intl.NumberFormat('en-US').format(vehicleInfo.inv_price)}</span>
         </div>
-      <hr 
-      <hr>
+    
+      
       
       <div id="detailsLeft">
         <a href="../../inv/detail/${vehicleInfo.inv_id}" title="View ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} details">
-            <img src="${vehicleInfo.inv_image}" alt="Image of ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} on CSE Motors" />
-        </a>
+          <img src="${vehicleInfo.inv_image}" alt="Image of ${vehicleInfo.inv_make} ${vehicleInfo.inv_model} on CSE Motors"></a>
       </div>
 
       
       <div id="detailsRight">
         <ul id="detailsList">
           <li><span> Price:
-          ${new Intl.NumberFormat("en-US").format(vehicleInfo.inv_price)} 
+          $${new Intl.NumberFormat("en-US").format(vehicleInfo.inv_price)}
           </span></li>
         
           <li><span> Description: ${vehicleInfo.inv_description} </span></li>
