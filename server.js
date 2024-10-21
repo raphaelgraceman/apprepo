@@ -10,6 +10,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const express = require("express")
 const utilities = require("./utilities/") 
+const bodyParser = require("body-parser")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
@@ -17,7 +18,6 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController"); 
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
-const bodyParser = require("body-parser")
 
 
 /* ***********************

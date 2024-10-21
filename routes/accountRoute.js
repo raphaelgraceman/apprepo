@@ -31,8 +31,7 @@ router.post(
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
-
-)
+);
 
 // Error handler middleware
 router.use((err, req, res, next) => {
