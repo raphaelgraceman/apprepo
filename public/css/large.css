@@ -10,7 +10,9 @@
     text-decoration: none;
     color: black;
   }
-
+  h1 {
+    text-align: center;
+  }
   #tools a {
     font-size: 1rem;
   }
@@ -181,6 +183,9 @@
     color:red ;
     font-size: 1rem;
   }
+  input {
+    width: 40%;
+  }
   #passCharacters {
     font-size: .95rem;
     color: rgb(255, 255, 255);
@@ -192,17 +197,50 @@
     color: white;
     border-radius: 1rem;
     padding: 0.75rem 1.5rem;
-    margin: 10px 0 2rem 10%;
+    margin-left: 20%;
     width: 96%;
     max-width: 20rem;
     cursor: pointer;
   }
-
+  #submitBtn:hover {
+    font-size: 22px;
+    background-color: green;
+    color: black;
+  }
   /* Form Login Style */
   #loginButton {
     background-color: green;
     color: black;
     cursor: pointer;
     margin-left: 30%;
+  }
+
+  /*Inventory Management View */
+  #invManagement {
+    display: grid;
+    padding-top: 10px;
+    border: 1px solid black;
+    border-bottom: 4px solid rgb(0, 0, 0);
+    background-color: rgb(255, 0, 0);
+  }
+  
+  #invManagement a{
+    color: rgb(255, 255, 255);
+    font: bolder;
+    text-align: center;
+  }
+  
+  #addClassification{
+    grid-column: 1;
+    grid-row: 1;
+    
+  }
+
+  #addInventory {
+    grid-column: 2;
+    grid-row: 1;
+    background-color: rgb(0, 0, 0);
+    border-radius: 12px 120px;
+    margin-left: -20%;
   }
 }

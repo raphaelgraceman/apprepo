@@ -9,7 +9,7 @@ const utilities = require("../utilities");
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
 // New default route for account management
-router.get('/', utilities.handleErrors(accountController.buildAccountManagementView));
+router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagementView));
 
 // Building the Route to deliver the account login view
 router.get(
