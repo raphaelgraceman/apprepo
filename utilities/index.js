@@ -179,5 +179,12 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
- 
+
+
+ Util.authorizeAdmin = (req, res, next) =>{
+  if (req.user && (req.user.accountType === 'Employee' || req.user.accountType === 'Admin')) {
+      return next();
+  }
+  res.redirect('/login?message=Unauthorized access');
+}
 module.exports = Util;

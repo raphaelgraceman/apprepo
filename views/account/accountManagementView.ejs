@@ -1,9 +1,17 @@
 <!---The Heading Content View-->
 <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else { res.redirect('/') } %>
-    
-    <!---The Messagee Block-->
-    <% messages() %>
-      
-    <p>You're logged in.</p>
+<h1><%= title %></h1>
+<% } else { res.redirect('/')} %>
+<!---The Messagee Block-->
+<% messages() %> 
+
+<!---Grea=etings based on account type--> 
+<% if (user.accountType ==='Client') { %>
+        <h2>Welcome <%= user.firstName %></h2><% } 
+    else { %>
+        <h2>Welcome Happy<%= user.firstName %></h2>
+        <h3>Inventory Management</h3>
+        <p><a href="/inventoryManagementView">Manage Inventory</a></p><% 
+    } 
+%>
+<a href="/update-account">Update Account Information</a>

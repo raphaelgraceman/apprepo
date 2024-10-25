@@ -1,0 +1,35 @@
+<!---The Heading Content View-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!---The Messagee Block-->
+<% messages() %>
+
+
+<h1>Modifying Inventory Item</h1>
+
+
+<form id="deleteForm" action="/inv/delete" method="POST">
+    <label for="inv_make">Make:</label>
+    <input type="text" name="inv_make" id="inv_make" readonly required>
+
+    <label for="inv_model">Model:</label>
+    <input type="text" name="inv_model" id="inv_model" readonly required>
+
+    <label for="inv_year">Year:</label>
+    <input type="text" name="inv_year" id="inv_year" readonly required>
+
+    <label for="inv_price">Price:</label>
+    <input type="text" name="inv_price" id="inv_price" readonly required>
+
+    <label for="inv_image">Image URL:</label>
+    <input type="text" name="inv_image" id="inv_image">
+    
+    <p>Confirm Deletion - The delete is permanent.</p>
+
+    <button type="submit">Delete</button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+</form>

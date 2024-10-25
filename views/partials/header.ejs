@@ -5,5 +5,11 @@
     <div id="tools">
       <a title="Click to log in" href="/account/login">My Account</a>
     </div>
+    <% if (user) { %>
+      <a href="/logout">Logout</a>
+      <a href="/account">Welcome <%= user.firstName %></a>
+  <% } else { %>
+      <a href="/login">My Account</a>
+  <% } %>
   </header>
   

@@ -1,13 +1,16 @@
-<!--Displays a flash message in the Home view-->
-<%- messages() %>
-
+<!---The Heading Content View-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else { res.redirect('/')} %>
+    <!---The Messagee Block-->
+    <% messages() %> 
 <h1>Welcome to CSE Motors!</h1>
 
 
 <div class="hero-image">  
     <img src="/images/vehicles/delorean-tn.jpg" alt="Nice Car">  
+    <h2>DMC Delorean</h2>
     <div class="hero-overlay-text">  
-        <h2>DMC Delorean</h2>
         <p>3 Cup holders <br> Superman doors <br> Fuzzy dice!</p>  
         <img src="/images/site/own_today.png" alt="Blue text">
     </div>  
@@ -16,8 +19,8 @@
 <hr>
 <article class="grid-view">
     <!---DMC Delorean Reviews-->
+    <h2>DMC Delorean Reviews</h2>
     <div id="grid-1">
-        <h2>DMC Delorean Reviews</h2>
         <div id="dmcReviews">
             <ul>
                 <li>"So fast it's almost like traveling in time." (4/5)</li>

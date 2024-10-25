@@ -4,6 +4,8 @@ const router = new express.Router()
 const utilities = require('../utilities');
 const invController = require("../controllers/invController")
 const validateClassification  = require("../utilities/inventory-validate")
+const { newInventoryRules, checkUpdateData } = require('../utilities/inventory-validation');
+
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
@@ -21,6 +23,9 @@ router.get("/", (invController.inventoryManagementView));
 router.get('/inv/add-classification', (req, res) => {
     res.render('inventory/add-classication'); 
 });
+
+//Route to get the iventory slection in the inventiry management view
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 //Route to post add classification view
 router.post('/inv/add-classification', async (req, res) => {
@@ -70,5 +75,17 @@ router.post('/inv/add-inventory', async (req, res) => {
         res.render('inventory/add-inventory', { invMake, invModel, classification_id });
     }
 });
+
+// Routes to edit inventory items
+app.get('/inv/edit/:inv_id', invController.editInventoryView);
+
+//Route to update inventory
+router.post("/update/", newInventoryRules(), checkUpdateData, invController.updateInventory);
+
+//Route to get the inventory delete view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.confirmDeleteInventory));
+
+// POST route to handle the delete process
+router.post('/delete', invController.deleteInventoryItem);
 
 module.exports = router;

@@ -33,10 +33,33 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 );
 
+
+// Route to update-account
+app.post('/update-account', (req, res) => {
+  const { firstName, lastName, email, account_id } = req.body;
+  regValidate.registationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.update-account)
+});
+
+app.post(
+  "/change-password", (req, res) => {
+  const newPassword = req.body.account_id;
+  regValidate.registationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.update-account)
+});
+
+
 // Error handler middleware
 router.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke! Cannot access account now");
+});
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('token'); // Clear the JWT token cookie
+  res.redirect('/'); // Redirect to the home view
 });
 
 module.exports = router;

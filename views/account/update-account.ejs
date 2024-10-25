@@ -1,0 +1,29 @@
+<!-- update-account -->
+<h1>Update Account</h1>
+<% if (errors) { %>
+    <div class="error">
+        <%= errors.login(', ') %>
+    </div>
+<% } %>
+
+<form action="/update-account" method="POST">
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" value="<%= user.first_name %>" required>
+    
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" value="<%= user.last_name %>" required>
+    
+    <label for="account_email">Email:</label>
+    <input type="email" name="account_email" value="<%= user.account_email %>" required>
+    
+    <input type="hidden" name="account_id" value="<%= user.account_id %>">
+    <button type="submit">Update</button>
+</form>
+
+<h2>Change Password</h2>
+<form action="/change-password" method="POST">
+    <label for="newPassword">New Password:</label>
+    <input type="password" name="newPassword" required>
+    <input type="hidden" name="account_id" value="<%= user.account_id %>">
+    <button type="submit">Change Password</button>
+</form>

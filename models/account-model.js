@@ -50,10 +50,37 @@ async function getAccountByEmail (account_email) {
     return new Error("No matching email found")
   }
 }
+/*A function to retrieve account information by ID  for update / changepassword */
+async function getAccountById(account_id) {
+  const query = 'SELECT * FROM accounts WHERE id = $1';
+  const result = await db.query(query, [account_id]);
+  return result.rows[0]; // Return the account information
+}
 
+/* A funtion to update the account information retrive */
+async function updateAccountInfo(account_id, firstName, lastName, email) {
+  const query = `
+      UPDATE accounts 
+      SET first_name = $1, last_name = $2, email = $3 
+      WHERE id = $4
+  `;
+  const result = await db.query(query, [firstName, lastName, email, account_id]);
+  return result.rowCount > 0; // Return true if the update was successful
+}
 
-
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail };
+/* A function to update account password */
+async function updatePassword(account_id, hashedPassword) {
+  const query = 'UPDATE accounts SET password = $1 WHERE id = $2';
+  const result = await db.query(query, [hashedPassword, account_id]);
+  
+  // Check if the password was updated successfully
+  if (result.rowCount > 0) {
+      const updatedAccount = await getAccountById(account_id);
+      return updatedAccount.password === hashedPassword; // Ensure the password is hashed
+  }
+  return false; // Return false if the update failed
+}
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccountInfo, updatePassword };
 
 
 

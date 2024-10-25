@@ -14,3 +14,22 @@
     <a id="addClassification" href="/inv/add-classification">Add New Classification</a>
     <a id="addInventory" href="/inv/add-inventory">Add New Inventory Item</a>
 </div>
+
+<h2>Manage Inventory</h2>
+<p>Select a class of item from the list.</p>
+
+<!--EJSblock code to classification options for selection-->
+<select name="classification_id" id="classificationList" required>
+    <option value="">Choose a Classification</option>
+    <% classifications.forEach(function(classification) { %>
+        <option value="<%= classification.classification_id %>">
+            <%= classification.classification_name %>
+        </option>
+    <% }); %>
+</select>
+
+<!--Table to dsiplay selected invetory items-->
+<table id="inventoryDisplay"></table>
+<noscript>JavaScript must be enabled to use this page.</noscript> <!---To display a message when javascript is disabled-->
+
+<script src="../../js/inventory.js"></script>

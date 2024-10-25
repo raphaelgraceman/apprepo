@@ -128,4 +128,38 @@ async function buildAccountManagementView(req, res, next) {
   req.session.error = null;
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView };
+// Function to handle password change
+async function changePassword(req, res) {
+  const { newPassword, account_id } = req.body;
+
+  // Validate the new password (you can add more validation as needed)
+  if (!newPassword || newPassword.length < 12) {
+      // Set an error message if validation fails
+      req.flash('error', 'Password must be at least 12 characters long.');
+      return res.redirect('/update-account'); // Redirect back to the update view
+  }
+
+  try {
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update the password in the database
+      const result = await registerAccount.updatePassword(account_id, hashedPassword);
+
+      if (result) {
+          // Set a success message if the update is successful
+          req.flash('success', 'Password updated successfully.');
+      } else {
+          // Set a failure message if the update fails
+          req.flash('error', 'Failed to update password. Please try again.');
+      }
+  } catch (error) {
+      // Handle any unexpected errors
+      req.flash('error', 'An error occurred while updating the password.');
+  }
+
+  // Redirect to the account management view
+  res.redirect("/buildAccountManagementView");
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, changePassword};
