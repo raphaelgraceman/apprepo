@@ -240,7 +240,7 @@ invCont.confirmDeleteInventory = async function (req, res, next) {
 
 
 // Function to handle the delete process
-exports.deleteInventoryItem = async (req, res) => {
+invCont.deleteInventoryItem = async (req, res) => {
   const inv_id = parseInt(req.body.inv_id);
   const result = await inventoryModel.deleteInventoryItem(inv_id);
   

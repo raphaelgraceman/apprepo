@@ -53,18 +53,18 @@ async function getAccountByEmail (account_email) {
 /*A function to retrieve account information by ID  for update / changepassword */
 async function getAccountById(account_id) {
   const query = 'SELECT * FROM accounts WHERE id = $1';
-  const result = await db.query(query, [account_id]);
+  const result = await pool.query(query, [account_id]);
   return result.rows[0]; // Return the account information
 }
 
 /* A funtion to update the account information retrive */
-async function updateAccountInfo(account_id, firstName, lastName, email) {
+async function updateAccountInfo(account_id, account_firstname, account_lastname, account_email) {
   const query = `
       UPDATE accounts 
-      SET first_name = $1, last_name = $2, email = $3 
+      SET account_firstname = $1, account_lastname = $2, account_email = $3 
       WHERE id = $4
   `;
-  const result = await db.query(query, [firstName, lastName, email, account_id]);
+  const result = await pool.query(query, [account_firstname, account_lastname, account_email, account_id]);
   return result.rowCount > 0; // Return true if the update was successful
 }
 

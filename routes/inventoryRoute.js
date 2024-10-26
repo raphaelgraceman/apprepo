@@ -3,8 +3,8 @@ const express = require("express")
 const router = new express.Router() 
 const utilities = require('../utilities');
 const invController = require("../controllers/invController")
-const validateClassification  = require("../utilities/inventory-validate")
-const { newInventoryRules, checkUpdateData } = require('../utilities/inventory-validation');
+const validateClassification = require("../utilities/inventory-validate")
+const { validateInventory, checkUpdateData } = require('../utilities/inventory-validate');
 
 
 // Route to build inventory by classification view
@@ -77,10 +77,10 @@ router.post('/inv/add-inventory', async (req, res) => {
 });
 
 // Routes to edit inventory items
-app.get('/inv/edit/:inv_id', invController.editInventoryView);
+router.get('/inv/edit/:inv_id', invController.editInventoryView);
 
 //Route to update inventory
-router.post("/update/", newInventoryRules(), checkUpdateData, invController.updateInventory);
+router.post("/update/", validateInventory, checkUpdateData, invController.updateInventory);
 
 //Route to get the inventory delete view
 router.get("/delete/:inv_id", utilities.handleErrors(invController.confirmDeleteInventory));

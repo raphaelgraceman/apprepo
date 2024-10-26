@@ -128,6 +128,41 @@ async function buildAccountManagementView(req, res, next) {
   req.session.error = null;
 }
 
+
+
+
+// Function to handle account updates
+async function updateAccount(req, res) {
+  const { account_id, account_email, account_password } = req.body;
+
+  try {
+      // Validate input data
+      if (!account_id || !account_email) {
+          return res.status(400).json({ message: 'User ID, username, and email are required.' });
+      }
+
+      // Find the user by ID
+      const user = await accountModel.findById(account_id);
+      if (!user) {
+          return res.status(404).json({ message: 'User not found.' });
+      }
+
+      // Update user details
+      user.email = email;
+
+      // Save the updated user
+      await user.save();
+
+      // Respond with the updated user data
+      res.status(200).json({ message: 'Account updated successfully.', user });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'An error occurred while updating the account.' });
+  }
+}
+
+
+
 // Function to handle password change
 async function changePassword(req, res) {
   const { newPassword, account_id } = req.body;
@@ -162,4 +197,4 @@ async function changePassword(req, res) {
   res.redirect("/buildAccountManagementView");
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, changePassword};
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, changePassword, updateAccount};
