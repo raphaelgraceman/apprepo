@@ -42,7 +42,7 @@ invCont.buildByVehicleId = async (req, res) => {
 invCont.inventoryManagementView = async function(req, res){
   const nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList() //calling the function to create a select lsit to be displayed in the inventory management view
-  res.render("./inventory/inventoryManagementView", {title: "Inventory Management", nav}, classificationSelect)   
+  res.render("./inventory/inventoryManagementView", {title: "Inventory Management", nav, classificationSelect})   
 } 
 
 

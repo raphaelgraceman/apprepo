@@ -16,17 +16,8 @@
 </div>
 
 <h2>Manage Inventory</h2>
-<p>Select a class of item from the list.</p>
-
-<!--EJSblock code to classification options for selection-->
-<select name="classification_id" id="classificationList" required>
-    <option value="">Choose a Classification</option>
-    <% classifications.forEach(function(classification) { %>
-        <option value="<%= classification.classification_id %>">
-            <%= classification.classification_name %>
-        </option>
-    <% }); %>
-</select>
+<p>Choose a classification to see those inventory items.</p>
+<%- classificationSelect %>
 
 <!--Table to dsiplay selected invetory items-->
 <table id="inventoryDisplay"></table>

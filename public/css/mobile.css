@@ -18,8 +18,7 @@ main {
   background-color: white;
 }
 
-.siteName a
-{
+.siteName a {
   text-decoration: none;
   color: black;
 }
@@ -38,15 +37,14 @@ main {
 
 /***DIsplay navigation in flex 
   direction with no decoration *****/
- 
- 
+
 nav ul {
   display: flex;
   list-style: none;
   margin: 15px;
   margin-left: -40px;
 }
- li {
+li {
   background-color: black;
   color: rgb(255, 255, 255);
   padding: 0.85rem;
@@ -206,23 +204,24 @@ input:required:valid {
 fieldset {
   background-image: url(/images/vehicles/adventador.jpg);
 }
-fieldset, legend {
+fieldset,
+legend {
   margin: 2rem 0;
   border: 1px solid black;
   border-radius: 10px;
-  padding: .5rem 2%;
+  padding: 0.5rem 2%;
   max-width: fit-content;
 }
 input {
   border-radius: 10px;
   margin-left: 15%;
 }
-form label{
+form label {
   display: block;
   margin-left: 15%;
   padding-top: 1rem;
-  color:red;
-  font-size: .8rem;
+  color: red;
+  font-size: 0.8rem;
 }
 /* Style the password input field when it is focused */
 input[type="password"]:focus {
@@ -235,7 +234,7 @@ input[type="password"]:focus {
 #registerAccountText {
   margin-left: 5%;
 }
-#registerAccount:hover{
+#registerAccount:hover {
   font-size: 22px;
   background-color: white;
 }
@@ -244,12 +243,12 @@ textarea:focus {
   outline: none;
 }
 #passCharacters {
-  font-size: .6rem;
+  font-size: 0.6rem;
   color: rgb(255, 255, 255);
   background-color: black;
 }
 #togglePassword {
-  font-size: .8rem;
+  font-size: 0.8rem;
   background-color: black;
   color: white;
 }
@@ -290,7 +289,6 @@ input::placeholder {
   padding: 2px;
 }
 
-
 /*Inv Management */
 #invManagement {
   display: block;
@@ -298,20 +296,38 @@ input::placeholder {
   border-bottom: 4px solid red;
 }
 
-#invManagement a{
+#invManagement a {
   color: black;
   text-decoration: none;
   padding: 10px;
-  transition: .5s;
-  opacity: .9;
-  transform: scale(1.0);
+  transition: 0.5s;
+  opacity: 0.9;
+  transform: scale(1);
   box-shadow: 10px 5px 20px #ffffff;
 }
 
-#invManagement a:hover{
+#invManagement a:hover {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   border-radius: 50px;
   text-decoration: none;
   font-size: 22px;
+}
+/*Inventory Management View */
+
+
+#invManagement a {
+  color: rgb(255, 255, 255);
+  font: bolder;
+  text-align: center;
+}
+
+#addClassification {
+  margin-bottom: 15px;
+}
+
+#addInventory {
+  background-color: rgb(0, 0, 0);
+  border-radius: 12px 120px;
+  
 }

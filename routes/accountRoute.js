@@ -57,10 +57,19 @@ router.use((err, req, res, next) => {
   res.status(500).send("Something broke! Cannot access account now");
 });
 
-router.get('/logout', (req, res) => {
-  res.clearCookie('token'); // Clear the JWT token cookie
-  res.redirect('/'); // Redirect to the home view
-});
+//router.get('/logout', (req, res) => {
+  //res.clearCookie('token'); // Clear the JWT token cookie
+  //res.redirect('/'); // Redirect to the home view
+//});
 
+
+router.get("/logout", (req, res) => {
+  req.session.destroy(err => {
+      if (err) {
+          return res.redirect('/'); // Handle error
+      }
+      res.redirect('/'); // Redirect to accountmment view
+  });
+});
 
 module.exports = router;
