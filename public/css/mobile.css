@@ -299,7 +299,6 @@ input::placeholder {
 #invManagement a {
   color: black;
   text-decoration: none;
-  padding: 10px;
   transition: 0.5s;
   opacity: 0.9;
   transform: scale(1);

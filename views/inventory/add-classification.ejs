@@ -10,9 +10,9 @@
 
 <!-- add-classification.ejs -->
 <h1>Add New Classification</h1>
-<form action="/classification" method="POST">
+<form action="add-classification" method="POST">
   <label for="classificationName">Classification Name:</label>
   <input type="text" name="classification_name" id="classificationName" required
-  pattern="[^\\s!@#$%^&*()_+={}|[\]:;\"'<>,.?/~`]+">
+  pattern="[^\\s!@#$%^&*()_+={}|[\]:;\">
   <button type="submit">Add Classification</button>
 </form>
