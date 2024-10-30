@@ -5,10 +5,14 @@
       res.redirect('/')
 } %>
 
-    
-<% if (messages()) { %>
-    <div class="flash-message"><%= messages() %></div>
-<% } %>
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+    <div class="alert alert-info" id="flash-message">
+        <% messages.forEach(function(message) { %>
+            <p><%= message %></p>
+        <% }); %>
+    </div>
+  <% } %>
 
 <div id="invManagement">
     <a id="addClassification" href="/inv/add-classification">Add New Classification</a>
@@ -24,3 +28,4 @@
 <noscript>JavaScript must be enabled to use this page.</noscript> <!---To display a message when javascript is disabled-->
 
 <script src="../../js/inventory.js"></script>
+<script src="/js/flash.js"></script>

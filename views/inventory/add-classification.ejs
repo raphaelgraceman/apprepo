@@ -1,18 +1,44 @@
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+<div class="alert alert-info" id="flash-message">
+  <% messages.forEach(function(message) { %>
+  <p><%= message %></p>
+  <% }); %>
+</div>
+<% } %>
+
 <!---The Heading Content View-->
 <% if (title) { %>
 <h1><%= title %></h1>
 <% } else { res.redirect('/') } %>
 
-<!---The Messagee Block-->
-<% messages() %>
-
-
-
-<!-- add-classification.ejs -->
-<h1>Add New Classification</h1>
-<form action="add-classification" method="POST">
-  <label for="classificationName">Classification Name:</label>
-  <input type="text" name="classification_name" id="classificationName" required
-  pattern="[^\\s!@#$%^&*()_+={}|[\]:;\">
+<form
+  action="/inv/add-classification"
+  method="POST"
+  onsubmit="return validateForm();"
+>
+  <label for="classification_name">Classification Name:</label>
+  <input
+    type="text"
+    name="classification_name"
+    id="classification_name"
+    required
+  />
   <button type="submit">Add Classification</button>
 </form>
+
+<script>
+  function validateForm() {
+    const classificationName = document.getElementById(
+      "classification_name"
+    ).value;
+    const regex = /^[a-zA-Z0-9]+$/; // Only allow alphanumeric characters
+    if (!regex.test(classificationName)) {
+      alert("Classification name cannot contain spaces or special characters.");
+      return false;
+    }
+    return true;
+  }
+</script>
+
+<script src="/js/flash.js"></script>

@@ -1,32 +1,50 @@
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+<div class="alert alert-info" id="flash-message">
+  <% messages.forEach(function(message) { %>
+  <p><%= message %></p>
+  <% }); %>
+</div>
+<% } %>
+
 <!---The Heading Content View-->
 <% if (title) { %>
 <h1><%= title %></h1>
 <% } else { res.redirect('/') } %>
 
-<!---The Messagee Block-->
-<% messages() %>
+<form action="/inv/add-inventory" method="POST">
+  <label for="inv_make">Make:</label>
+  <input type="text" name="inv_make" id="inv_make" required />
 
+  <label for="inv_model">Model:</label>
+  <input type="text" name="inv_model" id="inv_model" required />
 
-<h1>Add New Inventory Item</h1>
+  <label for="inv_description">Description:</label>
+  <input type="text" name="inv_description" id="inv_description" required />
 
+  <label for="inv_image">Image URL:</label>
+  <input type="text" name="inv_image" id="inv_image" />
 
-<form action="/add-inventory" method="POST">
-    <label for="inv_make">Make:</label>
-    <input type="text" name="inv_make" id="inv_make" required>
+  <label for="inv_thumbnail">Thumbnail:</label>
+  <input type="text" name="inv_thumbnail" id="inv_thumbnail" required />
 
-    <label for="inv_model">Model:</label>
-    <input type="text" name="inv_model" id="inv_model" required>
+  <label for="inv_price">Price:</label>
+  <input type="text" name="inv_price" id="inv_price" required />
 
-    <label for="classification_id">Classification:</label>
-    <select name="classification_id" id="classification_id" required>
-        <option value="">Choose a Classification</option>
-        <% classifications.forEach(classification => { %>
-            <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
-        <% }) %>
-    </select>
+  <label for="inv_year">Year:</label>
+  <input type="text" name="inv_year" id="inv_year" required />
 
-    <label for="inv_image">Image URL:</label>
-    <input type="text" name="inv_image" id="inv_image">
+  <label for="inv_miles">Miles:</label>
+  <input type="text" name="inv_miles" id="inv_miles" required />
 
-    <button type="submit">Add Inventory Item</button>
+  <label for="inv_color">Color:</label>
+  <input type="text" name="inv_color" id="inv_color" required />
+
+  <label for="classification_id"
+    >Classification: <%- classificationSelect %></label
+  >
+
+  <button type="submit" id="vehicleSubmitBtn">Add Vehicle</button>
 </form>
+
+<script src="/js/flash.js"></script>

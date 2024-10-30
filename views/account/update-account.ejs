@@ -1,10 +1,15 @@
 <!-- update-account -->
 <h1>Update Account</h1>
-<% if (errors) { %>
-    <div class="error">
-        <%= errors.login(', ') %>
+
+
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+    <div class="alert alert-info" id="flash-message">
+        <% messages.forEach(function(message) { %>
+            <p><%= message %></p>
+        <% }); %>
     </div>
-<% } %>
+  <% } %>
 
 <form action="/update-account" method="POST">
     <label for="first_name">First Name:</label>
@@ -27,3 +32,5 @@
     <input type="hidden" name="account_id" value="<%= user.account_id %>">
     <button type="submit">Change Password</button>
 </form>
+
+<script src="/js/flash.js"></script>

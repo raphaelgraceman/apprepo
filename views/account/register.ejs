@@ -4,14 +4,13 @@
 <% } else { res.redirect('/') } %>
 
 <!---The Messagee Block-->
-<% messages() %> 
-
-<% if (errors) { %>
-<ul class="notice">
-  <% errors.array().forEach(error => { %>
-  <li><%= error.msg %></li>
-  <% }) %>
-</ul>
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+  <div class="alert alert-info" id="flash-message">
+      <% messages.forEach(function(message) { %>
+          <p><%= message %></p>
+      <% }); %>
+  </div>
 <% } %>
 
 <!--Displaying the Registration HTML forms view-->
@@ -53,17 +52,6 @@
     <span<p id="registerAccountText">Already have account? <a id="registerAccount" href="/account/login">Login</a></p></span>  </form>
 </fieldset>
 
-<script>
-  const togglePasswordButton = document.getElementById("togglePassword");
-  const passwordInput = document.getElementById("accountPassword");
 
-  togglePasswordButton.addEventListener("click", function () {
-    // Toggle the type attribute
-    const type =
-      passwordInput.getAttribute("type") === "password" ? "text" : "password";
-    passwordInput.setAttribute("type", type);
 
-    // Toggle the button text
-    this.textContent = type === "password" ? "Show" : "Hide";
-  });
-</script>
+<script src="/js/flash.js"></script>

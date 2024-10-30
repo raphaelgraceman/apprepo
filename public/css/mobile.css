@@ -330,3 +330,12 @@ input::placeholder {
   border-radius: 12px 120px;
   
 }
+
+#flash-message {
+  background-color: rgb(42, 0, 250);
+  color: white;
+  text-align: center;
+  font: bolder;
+  font-size: larger;
+  padding: 3px;
+}

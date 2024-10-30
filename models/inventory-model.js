@@ -44,20 +44,37 @@ async function getByVehicleId(id)  {
 
 
 //Function to insert the classification item
-async function addClassification(classification_name) {
-    const query = 'INSERT INTO classifications (classification_name) VALUES ($1) RETURNING *';
-    const values = [classification_name];
-    const result = await pool.query(query, values);
-    return result.rows[0]; // Return the newly created classification
-}
+async function addClassification (classification_name)  {
+  const sql = `
+      INSERT INTO classification (classification_name)
+      VALUES ($1)
+      RETURNING classification_id;`;
 
-//Function to insert inventory item into the database
-async function addInventory({ inv_make, inv_model, classification_id, inv_image }) {
-  const query = 'INSERT INTO inventory (inv_make, inv_model, classification_id, inv_image) VALUES ($1, $2, $3, $4) RETURNING *';
-  const values = [inv_make, inv_model, classification_id, inv_image];
-  const result = await db.query(query, values);
-  return result.rows[0]; // Return the newly created inventory item
-}
+  try {
+      const result = await pool.query(sql, [classification_name]);
+      return result.rows[0]; // Return the inserted row
+  } catch (error) {
+      console.error("Model error:", error);
+      throw error; // Rethrow the error to be handled in the controller
+  }
+};
+
+
+// Function to Insert new vehicle
+async function addInventory (inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id) {
+  const sql = `
+      INSERT INTO inventory (inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING inv_id;`; 
+
+  try {
+      const result = await pool.query(sql, [inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id]);
+      return result.rows[0]; // Return the inserted row
+  } catch (error) {
+      console.error("Model error:", error);
+      throw error; // Rethrow the error to be handled in the controller
+  }
+};
 
 /* ***************************
  *  Update Inventory Data
@@ -111,4 +128,5 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getByVehicleId, addClassification, addInventory, updateInventory, deleteInventoryItem};
+module.exports = {getClassifications, getInventoryByClassificationId, getByVehicleId, 
+  addClassification,  addInventory, updateInventory, deleteInventoryItem};

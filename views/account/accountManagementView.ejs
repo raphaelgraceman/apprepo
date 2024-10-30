@@ -2,8 +2,15 @@
 <% if (title) { %>
 <h1><%= title %></h1>
 <% } else { res.redirect('/')} %>
+
 <!---The Messagee Block-->
-<% messages() %> 
+<% if (messages.length > 0) { %>
+    <div class="alert alert-info" id="flash-message">
+        <% messages.forEach(function(message) { %>
+            <p><%= message %></p>
+        <% }); %>
+    </div>
+  <% } %>
 
 <!---Grea=etings based on account type--> 
 <% if (accountData.accountType ==='Client') { %>
@@ -15,5 +22,7 @@
     } 
 %>
 <a href="/update-account">Update Account Information</a>
+
+<script src="/js/flash.js"></script>
 
 

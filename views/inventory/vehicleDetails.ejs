@@ -6,7 +6,15 @@
 } %>
 
 <!---The Messagee Block-->
-<% messages() %>
+<% if (messages.length > 0) { %>
+  <div class="alert alert-info" id="flash-message">
+      <% messages.forEach(function(message) { %>
+          <p><%= message %></p>
+      <% }); %>
+  </div>
+<% } %>
 
 <!--Display ve hicle items in Grid View-->
 <%- vehicleHtml %>
+
+<script src="/js/flash.js"></script>

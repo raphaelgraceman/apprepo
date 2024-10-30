@@ -44,7 +44,7 @@ invCont.inventoryManagementView = async function (req, res) {
   const classificationSelect = await utilities.buildClassificationList() //calling the function to create a select lsit to be displayed in the inventory management view
   res.render("./inventory/inventoryManagementView", { title: "Inventory Management", nav, classificationSelect })
 }
-
+//add classification view
 invCont.newClassificationView = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/add-classification", {
@@ -56,19 +56,33 @@ invCont.newClassificationView = async function (req, res, next) {
 
 
 //Function  to handle the classification Insertion
-invCont.addClassification = async function (req, res) {
+invCont.addClassificationName = async (req, res) => {
   const { classification_name } = req.body;
 
   try {
-    await inventoryModel.insertClassification(classification_name);
-    req.flash('success', 'Classification added successfully!');
-    res.redirect('/inv/'); // Redirect to the management view
-  } catch (error) {
-    req.flash('error', 'Failed to add classification. Please try again.');
-    res.redirect('/inv/add-classification'); // Redirect back to the form
-  }
-}
+      // Calling the model function to add classification
+      const insertResult = await invModel.addClassification(classification_name);
 
+      // Checking if the insertion was successful
+      if (insertResult) {
+          req.flash("info", "Classification added successfully.");
+          res.redirect("/inv/"); // And Redirect to the inventory management page
+      } else {
+          req.flash("info", "Failed to add classification.");
+          res.status(501).render("inventory/add-classification", { title: "Add Classification", errors: null });
+      }
+  } catch (error) {
+      console.error("Error adding classification:", error);
+      req.flash("info", "An error occurred while adding the classification.");
+      res.status(500).render("inventory/add-classification", { title: "Add Classification", errors: null});
+  }
+};
+
+
+
+
+
+//add new vehicle view Route
 invCont.newVehicleView = async function (req, res, next) {
   let nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList()
@@ -80,19 +94,53 @@ invCont.newVehicleView = async function (req, res, next) {
   })
 }
 
-//implementing function to hnadle the inventory insertion
-invCont.addInventory = async function (req, res) {
-  const { inv_make, inv_model, classification_id, inv_image } = req.body;
+// Function to handle add new vehicle or insertion
+invCont.addNewVehicle = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const {
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+  } = req.body;
 
   try {
-    await inventoryModel.insertInventory({ inv_make, inv_model, classification_id, inv_image });
-    req.flash('success', 'Inventory item added successfully!');
-    res.redirect('/inv/'); // Redirect to the management view
+      // Call the model function to add inventory
+      const insertResult = await invModel.addInventory(
+          inv_make,
+          inv_model,
+          inv_description,
+          inv_image,
+          inv_thumbnail,
+          inv_price,
+          inv_year,
+          inv_miles,
+          inv_color,
+          classification_id
+      );
+      const success = true;
+      // Check if the insertion was successful
+      if (success) {
+          req.flash("info", "Inventory item added successfully.");
+          res.redirect("/inv/"); // Redirect to the inventory management page
+      } else {
+          req.flash("info", "Failed to add inventory item.");
+          res.status(501).render("add-inventory", { title: "Add Inventory", nav, errors: null });
+      }
   } catch (error) {
-    req.flash('error', 'Failed to add inventory item. Please try again.');
-    res.redirect('/inv/add-inventory'); // Redirect back to the form
+      console.error("Error adding inventory:", error);
+      req.flash("info", "An error occurred while adding the inventory item.");
+      res.status(500).render("inventory/add-inventory", { title: "Add Inventory", nav, errors: null });
   }
-}
+};
+
+
 
 /* ***************************
  *  Return Inventory by Classification As JSON
@@ -169,12 +217,12 @@ invCont.updateInventory = async function (req, res, next) {
 
   if (updateResult) {
     const itemName = updateResult.inv_make + " " + updateResult.inv_model
-    req.flash("notice", `The ${itemName} was successfully updated.`)
+    req.flash("info", `The ${itemName} was successfully updated.`)
     res.redirect("/inv/")
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, the insert failed.")
+    req.flash("info", "Sorry, the insert failed.")
     res.status(501).render("inventory/edit-inventory", {
       title: "Edit " + itemName,
       nav,
@@ -216,7 +264,7 @@ invCont.confirmDeleteInventory = async function (req, res, next) {
     inv_color,
     classification_id,
   } = req.body
-  const deleteResult = await invModel.confirmDeleteInventory(
+  const deleteResult = await invModel.deleteInventoryItem(
     inv_id,
     inv_make,
     inv_model,
@@ -232,12 +280,12 @@ invCont.confirmDeleteInventory = async function (req, res, next) {
 
   if (deleteResult) {
     const itemName = deleteResult.inv_make + " " + deleteResult.inv_model
-    req.flash("notice", `The ${itemName} was successfully updated.`)
+    req.flash("info", `The ${itemName} was successfully updated.`)
     res.redirect("/inv/")
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, the insert failed.")
+    req.flash("info", "Sorry, the insert failed.")
     res.status(501).render("inventory/edit-inventory", {
       title: "Edit " + itemName,
       nav,
@@ -265,10 +313,10 @@ invCont.deleteInventoryItem = async (req, res) => {
   const result = await inventoryModel.deleteInventoryItem(inv_id);
 
   if (result) {
-    req.flash('success', 'Item deleted successfully.');
+    req.flash('info', 'Item deleted successfully.');
     res.redirect('/inventory');
   } else {
-    req.flash('error', 'Failed to delete item.');
+    req.flash('info', 'Failed to delete item.');
     res.redirect(`/inventory/delete/${inv_id}`);
   }
 };

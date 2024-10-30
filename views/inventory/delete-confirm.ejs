@@ -4,8 +4,13 @@
 <% } else { res.redirect('/') } %>
 
 <!---The Messagee Block-->
-<% messages() %>
-
+<% if (messages.length > 0) { %>
+    <div class="alert alert-info" id="flash-message">
+        <% messages.forEach(function(message) { %>
+            <p><%= message %></p>
+        <% }); %>
+    </div>
+  <% } %>
 
 <h1>Modifying Inventory Item</h1>
 
@@ -33,3 +38,4 @@
     <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
     <% } %>>
 </form>
+<script src="/js/flash.js"></script>

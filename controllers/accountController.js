@@ -39,7 +39,7 @@ async function registerAccount(req, res) {
     // regular password and cost (salt is generated automatically)
     hashedPassword = await bcrypt.hashSync(account_password, 10)
   } catch (error) {
-    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    req.flash("info", 'Sorry, there was an error processing the registration.')
     res.status(500).render("account/register", {
       title: "Registration",
       nav,
@@ -56,7 +56,7 @@ async function registerAccount(req, res) {
   );
   if (regResult) {
     req.flash(
-      "notice",
+      "info",
       `Congratulations, you\'re registered ${account_firstname}. Please log in.`
     );
     res.status(201).render("account/login", {
@@ -64,7 +64,7 @@ async function registerAccount(req, res) {
       nav,
     });
   } else {
-    req.flash("notice", "Sorry, the registration failed.");
+    req.flash("info", "Sorry, the registration failed.");
     res.status(501).render("account/login", {
       title: "Login",
       nav,
@@ -82,7 +82,7 @@ async function accountLogin(req, res) {
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
   if (!accountData) {
-    req.flash("notice", "Please check your credentials and try again.")
+    req.flash("info", "Please check your credentials and try again.")
     res.status(400).render("account/login", {
       title: "Login",
       nav,
@@ -103,7 +103,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("info", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -170,7 +170,7 @@ async function changePassword(req, res) {
   // Validate the new password (you can add more validation as needed)
   if (!newPassword || newPassword.length < 12) {
       // Set an error message if validation fails
-      req.flash('error', 'Password must be at least 12 characters long.');
+      req.flash('info', 'Password must be at least 12 characters long.');
       return res.redirect('/update-account'); // Redirect back to the update view
   }
 
@@ -183,14 +183,14 @@ async function changePassword(req, res) {
 
       if (result) {
           // Set a success message if the update is successful
-          req.flash('success', 'Password updated successfully.');
+          req.flash('info', 'Password updated successfully.');
       } else {
           // Set a failure message if the update fails
-          req.flash('error', 'Failed to update password. Please try again.');
+          req.flash('info', 'Failed to update password. Please try again.');
       }
   } catch (error) {
       // Handle any unexpected errors
-      req.flash('error', 'An error occurred while updating the password.');
+      req.flash('info', 'An error occurred while updating the password.');
   }
 
   // Redirect to the account management view

@@ -4,7 +4,13 @@
 <% } else { res.redirect('/') } %>
 
 <!---The Messagee Block-->
-<% messages() %>
+<% if (messages.length > 0) { %>
+  <div class="alert alert-info" id="flash-message">
+      <% messages.forEach(function(message) { %>
+          <p><%= message %></p>
+      <% }); %>
+  </div>
+<% } %>
 
 <!--Displaying the login HTML forms view-->
 
@@ -26,16 +32,5 @@
   </fieldset>
 </form>
 
-<script>
-  const togglePasswordButton = document.getElementById('togglePassword');
-  const passwordInput = document.getElementById('accountPassword');
 
-  togglePasswordButton.addEventListener('click', function () {
-  // Toggle the type attribute
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-
-      // Toggle the button text
-      this.textContent = type === 'password' ? 'Show' : 'Hide';
-  });
-</script>
+<script src="/js/flash.js"></script>

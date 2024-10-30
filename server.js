@@ -48,6 +48,10 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+app.use((req, res, next) => {
+  res.locals.messages = req.flash('info'); // or any other key you want to use
+  next();
+});
 
 
 

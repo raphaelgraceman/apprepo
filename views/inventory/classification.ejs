@@ -6,7 +6,14 @@
 } %>
 
 <!---The Messagee Block-->
-<%# messages() %>
+<% if (messages.length > 0) { %>
+  <div class="alert alert-info" id="flash-message">
+      <% messages.forEach(function(message) { %>
+          <p><%= message %></p>
+      <% }); %>
+  </div>
+<% } %>
 
 <!--The Inventory Items Display Block-->
 <%- grid %>
+<script src="/js/flash.js"></script>
