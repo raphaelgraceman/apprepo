@@ -202,7 +202,7 @@ input:required:valid {
   color: black;
 }
 fieldset {
-  background-image: url(/images/vehicles/adventador.jpg);
+  background-color: rgb(49, 49, 48);
 }
 fieldset,
 legend {
@@ -331,6 +331,7 @@ input::placeholder {
   
 }
 
+/*Fash Message alert Styling */
 #flash-message {
   background-color: rgb(42, 0, 250);
   color: white;
@@ -338,4 +339,9 @@ input::placeholder {
   font: bolder;
   font-size: larger;
   padding: 3px;
+}
+
+#logout-links{
+  display: flex;
+  gap: 20px;
 }

@@ -11,6 +11,7 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // New default route for account management
 router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagementView));
 
+
 // Building the Route to deliver the account login view
 router.get(
   "/register",
@@ -33,13 +34,15 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 );
 
-
+//Route to get the update view
+router.get('/update-account', (req, res) => {
+  utilities.handleErrors(accountController.updateAccount)
+});
 // Route to update-account
 router.post('/update-account', (req, res) => {
-  const { firstName, lastName, email, account_id } = req.body;
   regValidate.registationRules(),
   regValidate.checkRegData,
-  utilities.handleErrors(accountController.update-account)
+  utilities.handleErrors(accountController.updateAccount)
 });
 
 router.post(
@@ -47,7 +50,7 @@ router.post(
   const newPassword = req.body.account_id;
   regValidate.registationRules(),
   regValidate.checkRegData,
-  utilities.handleErrors(accountController.update-account)
+  utilities.handleErrors(accountController.updateAccount)
 });
 
 
@@ -62,14 +65,14 @@ router.use((err, req, res, next) => {
   //res.redirect('/'); // Redirect to the home view
 //});
 
-
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
+  // Clear the user session or token
   req.session.destroy(err => {
       if (err) {
-          return res.redirect('/'); // Handle error
+          return res.redirect('/'); // Redirect to home on error
       }
-      res.redirect('/'); // Redirect to accountmment view
+      res.render('logout'); // Render the logout view
   });
+  utilities.handleErrors(accountController.logoutView)
 });
-
 module.exports = router;

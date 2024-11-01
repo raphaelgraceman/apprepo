@@ -1,0 +1,12 @@
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+<div class="alert alert-info" id="flash-message">
+  <% messages.forEach(function(message) { %>
+  <p><%= message %></p>
+  <% }); %>
+</div>
+<% } %>
+
+<h2>You have successfully logged out.</h2>
+<p>Thank you for visiting! We hope to see you again soon.</p>
+<a href="/login">Log in again</a> | <a href="/">Return to Home</a>

@@ -17,12 +17,12 @@
         <h2>Welcome <%= accountData.account_firstname %></h2><% } 
     else { %>
         <h2>Welcome Happy <%= accountData.account_firstname %></h2>
-        <h3>Inventory Management</h3>
-        <p><a href="/inventoryManagementView">Manage Inventory</a></p><% 
-    } 
+        <a href="/account/update-account">Update Account Information</a>
+      <% } 
 %>
-<a href="/update-account">Update Account Information</a>
 
+<h3>Inventory Management</h3>
+<p><a href="/inventory/inventoryManagementView">Manage Inventory</a></p>
 <script src="/js/flash.js"></script>
 
 

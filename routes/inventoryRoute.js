@@ -17,7 +17,8 @@ router.get("/detail/:id", invController.buildByVehicleId);
 // Route for the management view
 router.get("/", (invController.inventoryManagementView));
 
-// Build addClassification View Route
+
+
 router.get(
     "/add-classification",
     utilities.handleErrors(invController.newClassificationView)
@@ -46,16 +47,16 @@ router.post(
 
 // Routes to edit inventory items
 router.get(
-    '/inv/edit/:inv_id', 
+    '/edit-inventory/:inv_id', 
     utilities.handleErrors(invController.editInventoryView));
 
-//Route to update inventory
-router.post("/update/", validateInventory, checkUpdateData, invController.updateInventory);
+//The route to post the edit inventory view
+router.post("/edit-inventory/", validateInventory, checkUpdateData, invController.updateInventory);
 
 //Route to get the inventory delete view
-router.get("/delete/:inv_id", utilities.handleErrors(invController.confirmDeleteInventory));
+router.get("/delete-inventory/:inv_id", utilities.handleErrors(invController.confirmDeleteInventoryView));
 
 // POST route to handle the delete process
-router.post('/delete', invController.deleteInventoryItem);
+router.post('/delete-inventory/', invController.deleteInventoryItem);
 
 module.exports = router;

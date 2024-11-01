@@ -1,0 +1,47 @@
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+<div class="alert alert-info" id="flash-message">
+    <% messages.forEach(function(message) { %>
+        <p><%= message %></p>
+    <% }); %>
+</div>
+<% } %>
+
+
+
+<!---The Heading Content View-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+
+
+<form id="deleteForm" action="/inv/delete-inventory" method="POST">
+    <label for="inv_make">Make:</label>
+    <input type="text" name="inv_make" id="inv_make" readonly required
+    <% if(locals.inv_make) { %> value="<%= locals.inv_make %>"
+    <% } %>>
+
+    <label for="inv_model">Model:</label>
+    <input type="text" name="inv_model" id="inv_model" readonly required
+    <% if(locals.inv_model) { %> value="<%= locals.inv_model %>"
+    <% } %>>
+
+    <label for="inv_year">Year:</label>
+    <input type="text" name="inv_year" id="inv_year" readonly required
+    <% if(locals.inv_year) { %> value="<%= locals.inv_year %>"
+    <% } %>>
+
+    <label for="inv_price">Price:</label>
+    <input type="text" name="inv_price" id="inv_price" readonly required  
+    <% if(locals.inv_price) { %> value="<%= locals.inv_price %>"
+    <% } %>>
+
+    <p>Confirm Deletion - The delete is permanent.</p>
+
+    <button type="submit">Delete</button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+</form>
+<script src="/js/flash.js"></script>

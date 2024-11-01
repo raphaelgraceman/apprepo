@@ -126,9 +126,16 @@ async function buildAccountManagementView(req, res, next) {
     error: null,
   });
   req.session.error = null;
+}  
+
+//Logout view
+async function logoutView(req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("account/logout", {
+    error: null,
+  })
+  req.session.error = null;
 }
-
-
 
 
 // Function to handle account updates
@@ -197,4 +204,4 @@ async function changePassword(req, res) {
   res.redirect("/buildAccountManagementView");
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, changePassword, updateAccount};
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, changePassword, updateAccount, logoutView};
