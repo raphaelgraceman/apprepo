@@ -19,6 +19,8 @@ const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const path = require('path');
+const cartRoutes = require("./routes/cartRoutes");
+
 
 /* ***********************
  * Middleware
@@ -76,6 +78,7 @@ app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute);
 // Serve static files from the public folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/cart', cartRoutes);
 
 
 

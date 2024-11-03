@@ -1,0 +1,37 @@
+<!---The Messagee Block-->
+<% if (messages.length > 0) { %>
+<div class="alert alert-info" id="flash-message">
+  <% messages.forEach(function(message) { %>
+  <p><%= message %></p>
+  <% }); %>
+</div>
+<% } %>
+
+<!---The Heading Content View-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach(item => { %>
+    <tr>
+      <td><%= item.inv_id %></td>
+      <td><%= item.quantity %></td>
+      <td>
+        <form action="/cart/remove/<%= item.inv_id %>" method="POST">
+          <button type="submit">Remove</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<a href="/checkout">Proceed to Checkout</a>
