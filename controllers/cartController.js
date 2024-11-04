@@ -1,4 +1,4 @@
-const cartModel = require("../models/cartModel")
+const catModel = require("../models/cartModel")
 const utilities = require("../utilities")
 
 const cartCont = {}
@@ -14,7 +14,7 @@ cartCont.addToCart = async (req, res) => {
 
     try {
         // Attempt to add the item to the cart
-        const result = await cartModel.addItem(account_id, inv_id, quantity);
+        const result = await catModel.addItem(account_id, inv_id, quantity);
         
         // Check if the item was successfully added
         if (result) {
@@ -34,7 +34,7 @@ cartCont.removeFromCart = async (req, res) => {
   const { inv_id } = req.params;
 
   try {
-    await cartModel.removeItem(inv_id);
+    await catModel.removeItem(inv_id);
     res.status(200).json({ message: "Item removed from cart" });
   } catch (error) {
     res.status(500).json( "info", "Failed to remove item from cart");
@@ -46,7 +46,7 @@ cartCont.viewCart = async (req, res) =>{
   const userId = req.session.account_id;
 
   try {
-    const items = await cartModel.getCartItems(userId);
+    const items = await catModel.getCartItems(userId);
     res.render("cart", { items }); // Assuming you have a view engine set up
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve cart items" });

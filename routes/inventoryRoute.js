@@ -8,14 +8,14 @@ const { validateInventory, checkUpdateData } = require('../utilities/inventory-v
 
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/type/:classificationId",  utilities.handleErrors(invController.buildByClassificationId));
 
 
 // Route to build vehicle details  
-router.get("/detail/:id", invController.buildByVehicleId);
+router.get("/detail/:id",  utilities.handleErrors(invController.buildByVehicleId));
 
 // Route for the management view
-router.get("/", (invController.inventoryManagementView));
+router.get("/",  utilities.handleErrors(invController.inventoryManagementView));
 
 
 
